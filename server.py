@@ -23,9 +23,10 @@ def index():
 def helloworld():
     return '<html><body>hello world</body></html>'
     
-@app.route('/api/add'):
-def route_add_video:
-    add_video()
+@app.route('/api/add')
+def route_add_listings():
+    add_listings()
+    return '<html><body>listings added</body></html>'
 
     
 # run server file here

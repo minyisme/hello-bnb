@@ -1,7 +1,7 @@
 '''All the library things'''
-from model import Listing, Video
+from model import Listing, Video, db
 
-def add_listing:
+def add_listings():
     listing_0 = Listing(listing_url="https://www.airbnb.com/rooms/3060662", airbnb_id="nija.mashruwala@gmail.com")
     db.session.add(listing_0)
 
