@@ -31,6 +31,8 @@ app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
 def index():
     """ Homepage for Mayberry Tree """
 
+    # return render_template("frontend.html", video_loc='/uploads/sample.mp4')
+
     return render_template("index.html")
 
 @app.route('/helloworld')
@@ -57,3 +59,10 @@ def get_video_to_display():
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(debug=True, port=5001, host="0.0.0.0")
+
+
+# Load web page on
+# STB URL parameters must be escaped      http://10.10.31.132:8080/itv/startURL?url=http://10.10.31.78:5001
+# Stop currently running app              http://10.10.31.132:8080/itv/stopITV
+# Retrieve WebKit logs from STB           http://10.10.31.132:8080/itv/getLogs
+
