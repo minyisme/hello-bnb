@@ -23,10 +23,22 @@ def index():
 def helloworld():
     return '<html><body>hello world</body></html>'
     
-@app.route('/api/add')
+@app.route('/api/add-listing')
 def route_add_listings():
+    """Hard coded two listings in libs.py to add to server"""
+
     add_listings()
     return '<html><body>listings added</body></html>'
+
+@app.route('/api/get', methods=["GET"])
+def get_video_to_display():
+    """Get request from DirecTV including the listing_url to query the db to find the relevant video and text to display to renter"""
+
+    listing_url = request.args.get("listing_url")
+
+    display = get_video_for_listing(listing_url)
+
+    return """FIX ME: video + text info for directv to api to use"""
 
     
 # run server file here
