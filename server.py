@@ -36,7 +36,7 @@ def get_video_to_display():
 
     video_obj = get_video_for_listing(request)
 
-    return """FIX ME: video + text info for directv to api to use"""
+    return '<html><body>FIX ME: DirectTV</body></html>'
 
     
 # run server file here
