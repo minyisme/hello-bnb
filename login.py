@@ -34,7 +34,7 @@ def get_user_info(access_token):
     data = urllib.urlencode(values)
     req = urllib2.Request(url, data, header)
     response = urllib2.urlopen(req)
-    result = response.read()
+    result = json.load(response)
     print result
 
     response.close()

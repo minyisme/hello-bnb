@@ -5,6 +5,7 @@ from flask import Flask, render_template
 
 # my libs
 from model import Negro
+from login import *
 
 # create app instance
 app = Flask(__name__)
@@ -22,6 +23,10 @@ def user_login():
 
     user_email = request.form.get('email')
     user_password = request.form.get('password')
+
+    access_token = get_access_tokens(user_email, user_password)
+
+    user_info = get_user_info(access_token)
 
     return """FIX ME: send email and password to airbnb login"""
 
