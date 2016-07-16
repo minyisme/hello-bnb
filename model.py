@@ -8,7 +8,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 # connect to database here.
 # replace "my_database" with the name of your database 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres:///my_database'
 db = SQLAlchemy()
 
 # All models go here
@@ -43,5 +42,15 @@ class Video(db.Model):
         return ("<Video video_id=%s video_url=%s listing_url=%s>" %(self.video_id, self.video_url, self.listing_url))
 
 
+def connect_to_db(app):
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres:///hello_bnb'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.app = app
+    db.init_app(app)
+
 if __name__ == "__main__":
+
+    from server import app
+    connect_to_db(app)
+    db.create_all()
     print "Successful Connected to database"
