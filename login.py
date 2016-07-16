@@ -1,6 +1,7 @@
 import urllib
 import urllib2
 import json
+import os
 
 
 def get_access_tokens(email, password):
@@ -8,8 +9,8 @@ def get_access_tokens(email, password):
 
     url = 'https://api.airbnb.com/v1/authorize'
     values = { 'client_id': '3092nxybyb0otqw18e8nh5nty','locale': 'en-US',
-               'currency': 'USD', 'grant_type': 'password', 'password': XXXXXXX,
-               'username': 'email@gmail.com' }
+               'currency': 'USD', 'grant_type': 'password', 'password': os.environ['PASSWORD'],
+               'username': os.environ['EMAIL'] }
     header = { 'User-Agent': 'Mozilla/4.0' }
     data = urllib.urlencode(values)
     req = urllib2.Request(url, data, header)
