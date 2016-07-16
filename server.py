@@ -23,7 +23,11 @@ def index():
 def helloworld():
     return '<html><body>hello world</body></html>'
     
+@app.route('/api/add'):
+def route_add_video:
+    add_video()
 
+    
 # run server file here
 if __name__ == "__main__":
     connect_to_db(app)
