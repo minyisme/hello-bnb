@@ -42,11 +42,27 @@ class Video(db.Model):
         return ("<Video video_id=%s video_url=%s listing_url=%s>" %(self.video_id, self.video_url, self.listing_url))
 
 
-def connect_to_db(app):
+def connect_to_db(app):    
+    '''Create tables if none exist'''
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres:///hello_bnb'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)
+    # Test to see if our Video table exists
+    query1 = """
+    SELECT count(relname)
+    FROM pg_class
+    WHERE relname = 'videos'
+    """
+    db_cursor = db.session.execute(query1)
+    row = db_cursor.fetchone()
+    # Check to see if the table exists; 0 means to recreate everything
+    if row[0] == 0:
+        #import pdb; pdb.set_trace()
+        # print "\n\n\tCreating the world\n\n"
+        db.create_all()
+
+
 
 if __name__ == "__main__":
 
