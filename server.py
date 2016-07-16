@@ -1,20 +1,30 @@
 # python libs
-
-
+import os
 
 # third party libs
 from flask import Flask, render_template
-
+from werkzeug import SharedDataMiddleware
 # custom libs
 from model import Listing, Video, connect_to_db
 from libs import *
-UPLOAD_FOLDER = 'static/uploads'
+
+# Set up storage for uploaded photos
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(APP_ROOT, 'static/uploads')
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'mp4'])
 
 
-# create app instance
-app = Flask(__name__)
+# Create app
+app = Flask(__name__, static_url_path="/static")
+
+# Handles users uploaded files and builds path to uploads folder
+# so that uploaded files can be served as '/uploads/<name-of-file>'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.add_url_rule('/uploads/<filename>', 'uploaded_file',
+                 build_only=True)
+app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
+    '/uploads':  app.config['UPLOAD_FOLDER']
+})
 
 # all routes go here
 @app.route('/')
