@@ -17,10 +17,10 @@ def add_listings():
     print "Listings successfully added."
 	
 # Used by DirecTV
-def get_video_for_listing(request):
+def get_video_for_listing():
     """Queries db for video object by listing_url"""
 
-    listing_url = request.args.get("listing_url")
+    listing_url = 'https://www.airbnb.com/rooms/2386522'
 
     video = Video.query.filter_by(listing_url=listing_url).one()
 

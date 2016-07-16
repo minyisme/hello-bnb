@@ -44,13 +44,13 @@ def route_add_listings():
     add_listings()
     return '<html><body>listings added</body></html>'
 
-@app.route('/api/get', methods=["GET"])
+@app.route('/api/get')
 def get_video_to_display():
     """Get request from DirecTV including the listing_url to query the db to find the relevant video and text to display to renter"""
 
-    video_obj = get_video_for_listing(request)
+    video_obj = get_video_for_listing()
 
-    return '<html><body>FIX ME: DirectTV</body></html>'
+    return render_template("frontend.html", video=video_obj)
 
     
 # run server file here
