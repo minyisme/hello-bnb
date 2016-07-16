@@ -34,23 +34,37 @@ class Video(db.Model):
     video_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     video_url = db.Column(db.String(1024), nullable=False)
     listing_url = db.Column(db.String(1024), db.ForeignKey('listings.listing_url'), nullable=False)
+    info_text = db.Column(db.String(4096), nullable=True)
 
     listing = db.relationship('Listing', backref='video')
 
     def __repr__(self):
 
-        return ("<Video video_id=%s video_url=%s listing_url=%s>" %(self.video_id, self.video_url, self.listing_url))
+        return ("<Video video_id=%s video_url=%s listing_url=%s info_text=%s>" %(self.video_id, self.video_url, self.listing_url, self.info_text))
 
 
-def connect_to_db(app):
+def connect_to_db(app):    
+    '''Create tables if none exist'''
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres:///hello_bnb'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)
+    # Test to see if our Video table exists
+    query1 = """
+    SELECT count(relname)
+    FROM pg_class
+    WHERE relname = 'videos'
+    """
+    db_cursor = db.session.execute(query1)
+    row = db_cursor.fetchone()
+    # Check to see if the table exists; 0 means to recreate everything
+    if row[0] == 0:
+        db.create_all()
+
+
 
 if __name__ == "__main__":
 
     from server import app
     connect_to_db(app)
-    db.create_all()
     print "Successful Connected to database"
