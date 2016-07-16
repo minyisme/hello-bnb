@@ -58,8 +58,6 @@ def connect_to_db(app):
     row = db_cursor.fetchone()
     # Check to see if the table exists; 0 means to recreate everything
     if row[0] == 0:
-        #import pdb; pdb.set_trace()
-        # print "\n\n\tCreating the world\n\n"
         db.create_all()
 
 
@@ -68,5 +66,4 @@ if __name__ == "__main__":
 
     from server import app
     connect_to_db(app)
-    db.create_all()
     print "Successful Connected to database"

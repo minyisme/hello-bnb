@@ -7,6 +7,7 @@ from flask import Flask, render_template
 
 # custom libs
 from model import Listing, Video, connect_to_db
+from libs import *
 
 # create app instance
 app = Flask(__name__)
@@ -22,6 +23,7 @@ def index():
 def helloworld():
     return '<html><body>hello world</body></html>'
     
+
 # run server file here
 if __name__ == "__main__":
     connect_to_db(app)
