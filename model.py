@@ -34,12 +34,13 @@ class Video(db.Model):
     video_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     video_url = db.Column(db.String(1024), nullable=False)
     listing_url = db.Column(db.String(1024), db.ForeignKey('listings.listing_url'), nullable=False)
+    info_text = db.Column(db.String(4096), nullable=True)
 
     listing = db.relationship('Listing', backref='video')
 
     def __repr__(self):
 
-        return ("<Video video_id=%s video_url=%s listing_url=%s>" %(self.video_id, self.video_url, self.listing_url))
+        return ("<Video video_id=%s video_url=%s listing_url=%s info_text=%s>" %(self.video_id, self.video_url, self.listing_url, self.info_text))
 
 
 def connect_to_db(app):    
