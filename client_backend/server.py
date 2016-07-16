@@ -35,15 +35,7 @@ def user_logout():
 @app.route('/api/add-video', methods=["POST"])
 def route_add_video():
 
-    listing_url = request.form.get('listing_url')
-    video_url = request.form.get('video_url')
-    info_text = request.form.get('info_text')
-
-    video = Video(video_url=video_url, listing_url=listing_url, info_text=info_text)
-
-    db.session.add(video)
-
-    db.session.commit()
+    video_obj = add_video(request)
 
     return """FIX ME: confirmation that video has been added"""
 

@@ -34,9 +34,7 @@ def route_add_listings():
 def get_video_to_display():
     """Get request from DirecTV including the listing_url to query the db to find the relevant video and text to display to renter"""
 
-    listing_url = request.args.get("listing_url")
-
-    display = get_video_for_listing(listing_url)
+    video_obj = get_video_for_listing(request)
 
     return """FIX ME: video + text info for directv to api to use"""
 
