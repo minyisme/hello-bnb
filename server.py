@@ -8,9 +8,13 @@ from flask import Flask, render_template
 # custom libs
 from model import Listing, Video, connect_to_db
 from libs import *
+UPLOAD_FOLDER = 'static/uploads'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'mp4'])
+
 
 # create app instance
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # all routes go here
 @app.route('/')
@@ -19,9 +23,9 @@ def index():
 
     return render_template("index.html")
 
-@app.route('/api/helloworld')
+@app.route('/helloworld')
 def helloworld():
-    return '<html><body>hello world</body></html>'
+    return '<html><body><h1 style="color:white">hello world</h1><video id="videoSample" src="https://s3-us-west-2.amazonaws.com/hellobnb/m09yFoF+copy.mp4" height="720" width="1280" autoplay="autoplay"></video></body></html>'
     
 @app.route('/api/add-listing')
 def route_add_listings():
