@@ -42,4 +42,4 @@ def get_video_to_display():
 # run server file here
 if __name__ == "__main__":
     connect_to_db(app)
-    app.run(debug=True, port=5001)
+    app.run(debug=True, port=5001, host="0.0.0.0")
